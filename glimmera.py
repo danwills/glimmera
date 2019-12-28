@@ -214,7 +214,7 @@ def writeFrame( write_screen, write_frameNumber ):
     frameFilename2 = '%s/%s_%s.%s' % (renderFiles, animName, fileNumber, fileFormat.lower())
     
     # write file
-    print "writing image file: " + str( frameFilename2 )
+    print( "writing image file: " + str( frameFilename2 ) )
     pygame.image.save( write_screen, frameFilename2 )
     # pygame.image.save(write_screen, frameFilename1)
     
@@ -243,7 +243,7 @@ def randomColour( col_min=0, col_max=255 ) :
     return red, green, blue
     
 
-def resizeGL( ( scrWidth, scrHeight ) ) :
+def resizeGL( scrWidth, scrHeight ) :
     if scrHeight == 0 :
         scrHeight = 1
     glViewport( 0, 0, scrWidth, scrHeight )
@@ -286,7 +286,7 @@ if __name__ == '__main__' :
             txlist.append( txx )
 
     if verbose :
-        print "texlist: " + str( txlist )
+        print( "texlist: " + str( txlist ) )
 
     fullscreen = True
 
@@ -306,15 +306,15 @@ if __name__ == '__main__' :
     screen = pygame.display.set_mode( ( width, height ), vflags )
     
     pygame.display.set_caption( animName )
-    resizeGL( ( width, height ) )
+    resizeGL( width, height )
     
     initGL()
     textures = loadTextureGL( txlist )
     
     # tell the user how many frames are going to be rendered
-    # print "rendering %d frames ..." % frames
+    # print( "rendering %d frames ..." % frames )
     if verbose :
-        print "INIT finished"
+        print( "INIT finished" )
     # create a loop and draw the animation frames
     # start endless loop
     
@@ -356,7 +356,7 @@ if __name__ == '__main__' :
         frame_number += 1
         # save frame
         if recording:
-            print "Saving frame: " + str( recorded_frame_number )
+            print( "Saving frame: " + str( recorded_frame_number ) )
             writeFrame( screen, recorded_frame_number )
             recorded_frame_number += 1
         # pause before next frame
@@ -365,12 +365,12 @@ if __name__ == '__main__' :
         newTime = time.time()
         timeDiff = (newTime - last_time)
         # if verbose :
-        #   print "FPS:" + str( 1.0 / timeDiff )
+        #   print( "FPS:" + str( 1.0 / timeDiff ) )
         last_time = newTime
         # Event Handling:
         events = pygame.event.get( )
 
-        # print events
+        # print( events )
 
         for e in events :
             if e.type == QUIT :
@@ -380,21 +380,21 @@ if __name__ == '__main__' :
                 if e.key == K_RIGHT:
                     selected_tex += 1
                     if verbose :
-                        print "Switched to next texture (number %d)" % selected_tex
+                        print( "Switched to next texture (number %d)" % selected_tex )
                 elif e.key == K_LEFT:
                     selected_tex -= 1
                     if verbose :
-                        print "Switched to previous texture (number %d)" % selected_tex
+                        print( "Switched to previous texture (number %d)" % selected_tex )
                     
                 elif e.key == K_PAGEUP :
                     if pygame.key.get_mods() & KMOD_CTRL :
                         shutter_samples *= 2
                         if verbose :
-                            print "Doubled shutter samples: " + str( shutter_samples )
+                            print( "Doubled shutter samples: " + str( shutter_samples ) )
                     else :
                         shutter_samples += 1
                         if verbose :
-                            print "Increased shutter samples: " + str( shutter_samples )
+                            print( "Increased shutter samples: " + str( shutter_samples ) )
                     # recalc normalization
                     shutter_sum = getShutterSum( shutter_samples, 0.5 )
 
@@ -407,93 +407,93 @@ if __name__ == '__main__' :
                     shutter_sum = getShutterSum( shutter_samples, 0.5 )
 
                     if verbose :
-                        print "Reduced shutter samples: " + str( shutter_samples )
+                        print( "Reduced shutter samples: " + str( shutter_samples ) )
                     
                     # recalc normalization
                 elif e.key == K_HOME :
                     if pygame.key.get_mods( ) & KMOD_CTRL :
                         shutter_length *= 2.0
                         if verbose :
-                            print "Doubled shutter length: " + str( shutter_length )
+                            print( "Doubled shutter length: " + str( shutter_length ) )
                     else :
                         shutter_length += 1.0
                         if verbose :
-                            print "Incremented shutter length: " + str( shutter_length )
+                            print( "Incremented shutter length: " + str( shutter_length ) )
                     
                 elif e.key == K_END :
                     if pygame.key.get_mods( ) & KMOD_CTRL :
                         shutter_length *= 0.5
                         if verbose :
-                            print "Halved shutter length: " + str( shutter_length )
+                            print( "Halved shutter length: " + str( shutter_length ) )
                     else :
                         shutter_length -= 1.0
                         if verbose :
-                            print "Decremented shutter length: " + str( shutter_length )
+                            print( "Decremented shutter length: " + str( shutter_length ) )
                     
                 elif e.key == K_INSERT :
                     exposure *= 1.1
                     if verbose :
-                        print "Exposure up to: " + str( exposure )
+                        print( "Exposure up to: " + str( exposure ) )
                     
                 elif e.key == K_DELETE :
                     exposure *= 0.9
                     if verbose :
-                        print "Exposure down to: " + str( exposure )
+                        print( "Exposure down to: " + str( exposure ) )
                     
                 elif e.key == K_LEFTBRACKET :
                     freq *= 0.8
                     if verbose :
-                        print "Base frequency down to: " + str( freq )
+                        print( "Base frequency down to: " + str( freq ) )
                     
                 elif e.key == K_RIGHTBRACKET :
                     freq *= 1.2
                     if verbose :
-                        print "Base frequency up to: " + str( freq )
+                        print( "Base frequency up to: " + str( freq ) )
                 
                 elif e.key == K_COMMA :
                     hueFreq *= 0.8
                     if verbose :
-                        print "Hue frequency down to: " + str( hueFreq )
+                        print( "Hue frequency down to: " + str( hueFreq ) )
                     
                 elif e.key == K_PERIOD :
                     hueFreq *= 1.2
                     if verbose :
-                        print "Hue frequency up to: " + str( hueFreq )
+                        print( "Hue frequency up to: " + str( hueFreq ) )
                 
                 elif e.key == K_SEMICOLON:
                     offset_freq *= 0.8
                     if verbose :
-                        print "Offset frequency down to: " + str( offset_freq )
+                        print( "Offset frequency down to: " + str( offset_freq ) )
                     
                 elif e.key == K_QUOTE :
                     offset_freq *= 1.2
                     if verbose :
-                        print "Offset frequency up to: " + str( offset_freq )
+                        print( "Offset frequency up to: " + str( offset_freq ) )
                 
                 elif e.key == K_7:
                     rot_freq *= 0.8
                     if verbose :
-                        print "Rotate frequency down to: " + str( rot_freq )
+                        print( "Rotate frequency down to: " + str( rot_freq ) )
                 
                 elif e.key == K_8:
                     rot_freq *= 1.2
                     if verbose :
-                        print "Rotate frequency up to: " + str( rot_freq )
+                        print( "Rotate frequency up to: " + str( rot_freq ) )
                     
                 elif e.key == K_9:
                     scale_freq *= 0.8
                     if verbose :
-                        print "Scale frequency down to: " + str( scale_freq )
+                        print( "Scale frequency down to: " + str( scale_freq ) )
                     
                 elif e.key == K_0 :
                     scale_freq *= 1.2
                     if verbose :
-                        print "Scale frequency up to: " + str( scale_freq )
+                        print( "Scale frequency up to: " + str( scale_freq ) )
 
                 elif e.key == K_q :
                     if pygame.key.get_mods( ) & KMOD_CTRL :
                         if verbose :
-                            print "Quit with Ctrl-Q"
+                            print( "Quit with Ctrl-Q" )
                         done = True
                         break
 
@@ -511,16 +511,16 @@ if __name__ == '__main__' :
                     rot_freq = 0.49152
 
                     if verbose :
-                        print "Freq and offsets reset"
+                        print( "Freq and offsets reset" )
                 
                 elif e.key == K_MINUS :
                     freq = --freq
                     if verbose :
-                        print "Freq reversed"
+                        print( "Freq reversed" )
                     
                 elif e.key == K_ESCAPE:
                     if verbose :
-                        print "User pressed escape, exiting.."
+                        print( "User pressed escape, exiting.." )
                     done = True
                     break
                     
@@ -531,15 +531,15 @@ if __name__ == '__main__' :
                     if recording:
                         # recordedFrameNumber = 0
                         if verbose :
-                            print "Recording frames ...."
+                            print( "Recording frames ...." )
                     else:
-                        # print "%d frames recorded." % recordedFrameNumber
+                        # print( "%d frames recorded." % recordedFrameNumber )
                         if verbose :
-                            print "Recording stopped ...."
+                            print( "Recording stopped ...." )
                         
                 elif e.key == K_RETURN:
                     if verbose :
-                        print "Enter pressed, toggling fullscreen to: " + str( not fullscreen)
+                        print( "Enter pressed, toggling fullscreen to: " + str( not fullscreen) )
 
                     if fullscreen:
                         fullscreen = False
@@ -550,25 +550,25 @@ if __name__ == '__main__' :
                     
                     screen = pygame.display.set_mode( ( width, height ), vflags )
                     pygame.display.set_caption( animName )
-                    resizeGL( ( width, height ) )
+                    resizeGL( width, height )
                     initGL()
                     textures = loadTextureGL( txlist )
                     
             elif e.type == MOUSEMOTION:
-                # print "mouse motion, pos: " + str( e.pos ) + " rel: " + str( e.rel ) + " buttons: " + str( e.buttons )
+                # print( "mouse motion, pos: " + str( e.pos ) + " rel: " + str( e.rel ) + " buttons: " + str( e.buttons ) )
                 if e.buttons[0] :
                     offset[0] += e.rel[0] / 100.0
                     offset[1] += e.rel[1] / 100.0
-                    # print "Offset is now: " + str( offset )
+                    # print( "Offset is now: " + str( offset ) )
                 if e.buttons[1] :
                     offset[0] = 0
                     offset[1] = 0
-                    # print "Offset is ZERO"
+                    # print( "Offset is ZERO" )
                 if e.buttons[2] :
                     offset[0] = ( ( e.pos[0] / float( width ) ) - 0.5 ) * -10
                     offset[1] = ( ( e.pos[1] / float( height ) ) - 0.5 ) * -10
-                    # print "Offset is now: " + str( offset )
+                    # print( "Offset is now: " + str( offset ) )
                             
     # tell the user we have finished
     if verbose :
-        print "%d frames saved." % recorded_frame_number
+        print( "%d frames saved." % recorded_frame_number )
